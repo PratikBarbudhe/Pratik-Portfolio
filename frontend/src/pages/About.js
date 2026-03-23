@@ -99,7 +99,7 @@ const About = () => {
                     </p>
                     <p className="pl-4">
                       <span className="text-cyber-accent">year</span>:{' '}
-                      <span className="text-cyber-primary">"1st Year"</span>,
+                      <span className="text-cyber-primary">"2st Year"</span>,
                     </p>
                     <p className="pl-4">
                       <span className="text-cyber-accent">goal</span>:{' '}

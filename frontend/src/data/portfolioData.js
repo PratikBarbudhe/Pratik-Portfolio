@@ -19,7 +19,7 @@ export const aboutData = {
   careerObjective: `Aspiring SOC Analyst with a strong foundation in web security, vulnerability assessment, and security tooling. I'm actively seeking internships and entry-level roles in Cyber Security (SOC Analyst / IT Audit / Cyber Consultant track) where I can apply my practical project experience and continue learning from industry professionals.`,
   
   highlights: [
-    "MCA (1st Year) - Cyber Security Specialization",
+    "MCA (2st Year) - Cyber Security Specialization",
     "Hands-on experience with OWASP Top 10 vulnerabilities",
     "Built production-ready security tools with Python & Flask",
     "Practical learner with a project-driven approach",
@@ -37,7 +37,7 @@ export const aboutData = {
   education: {
     degree: "Master of Computer Applications (MCA)",
     specialization: "Cyber Security",
-    year: "1st Year",
+    year: "2st Year",
     status: "Currently Pursuing",
   },
 };
@@ -184,11 +184,11 @@ export const certificationsData = [
   {
     id: 1,
     title: "Cyber Security Fundamentals",
-    issuer: "Add Issuer Name", // e.g., "Coursera", "Udemy", "NPTEL"
-    date: "2024", // Update with actual date
-    credentialId: "XXXXX", // Add if available
-    credentialUrl: "#", // Add verification URL
-    image: "https://placehold.co/1000x650/0b1020/00ff88?text=Cyber+Security+Fundamentals",
+    issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
+    date: "Apr 2024", // Update with actual date
+    credentialId: "NVL7NHUVEXDZ", // Add if available
+    credentialUrl: "https://coursera.org/verify/NVL7NHUVEXDZ", // Add verification URL
+    image: "https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU",
     description: "Completed foundational training covering key security principles and practical defensive strategies.",
     keyLearnings: [
       "Threat modeling basics",
@@ -268,6 +268,7 @@ export const learningJournalData = [
     topic: "Nmap Service Enumeration",
     notes: "Compared scan options for speed and detail, and wrote notes on interpreting open ports and service banners.",
   },
+  
 ];
 
 export const navLinks = [

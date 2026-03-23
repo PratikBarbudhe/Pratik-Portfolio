@@ -155,11 +155,11 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
             >
-              <span className="text-cyber-text">Hi, I'm a</span>
+              <span className="text-cyber-text">Hi, I’m </span>
               <br />
-              <span className="gradient-text">Cyber Security</span>
+              <span className="text-cyber-text">Pratik Barbudhe</span>
               <br />
-              <span className="text-cyber-text">Enthusiast</span>
+              <span className="gradient-text">CyberSecurity Enthusiast</span>
             </motion.h1>
 
             {/* Tagline */}
@@ -435,7 +435,7 @@ const Home = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-primary via-cyber-secondary to-cyber-accent" />
             
             <h2 className="text-3xl md:text-4xl font-bold text-cyber-text mb-4">
-              Ready to <span className="text-cyber-primary">Secure</span> Your Team?
+              Ready to <span className="text-cyber-primary">Secure</span> With Your Team?
             </h2>
             <p className="text-cyber-muted mb-8 max-w-xl mx-auto">
               I'm actively seeking internships and entry-level positions in Cyber Security.
