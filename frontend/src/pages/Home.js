@@ -16,6 +16,8 @@ import {
   Server
 } from 'lucide-react';
 import { personalInfo, projectsData, learningJournalData } from '../data/portfolioData';
+import EmailProviderMenu from '../components/EmailProviderMenu';
+import profileImage from '../assets/profile/profile-placeholder.svg';
 
 // Animated background particles
 const CyberParticles = () => (
@@ -133,7 +135,26 @@ const Home = () => {
         <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-cyber-secondary/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex justify-center lg:justify-start"
+            >
+              <div className="relative w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyber-primary via-cyber-secondary to-cyber-accent p-[3px]">
+                  <img
+                    src={profileImage}
+                    alt="Pratik Barbudhe profile"
+                    className="w-full h-full rounded-full object-cover bg-cyber-card"
+                  />
+                </div>
+                <div className="absolute inset-0 rounded-full blur-2xl bg-cyber-primary/20 -z-10" />
+              </div>
+            </motion.div>
+
+            <div className="text-center lg:text-left">
             {/* Terminal-style intro */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -169,7 +190,7 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mb-8"
             >
-              <p className="text-lg md:text-xl text-cyber-muted max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-cyber-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 <span className="text-cyber-primary font-mono">MCA Cyber Security Student</span>
                 {' | '}
                 <span className="text-cyber-secondary">SOC Analyst Aspirant</span>
@@ -183,7 +204,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-cyber-darker border border-cyber-border rounded-lg p-4 max-w-xl mx-auto mb-10 font-mono text-sm"
+              className="bg-cyber-darker border border-cyber-border rounded-lg p-4 max-w-xl mx-auto lg:mx-0 mb-10 font-mono text-sm"
             >
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-3 h-3 rounded-full bg-cyber-danger" />
@@ -207,7 +228,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12"
             >
               <Link to="/projects" className="btn-cyber-filled flex items-center gap-2">
                 <Shield className="w-4 h-4" />
@@ -224,7 +245,7 @@ const Home = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="flex items-center justify-center gap-6"
+              className="flex items-center justify-center lg:justify-start gap-6"
             >
               <a
                 href={personalInfo.github}
@@ -244,14 +265,14 @@ const Home = () => {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="p-3 bg-cyber-card border border-cyber-border rounded-lg text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent transition-all duration-300 hover:shadow-[0_0_20px_rgba(124,58,237,0.2)]"
-                aria-label="Email"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
+              <EmailProviderMenu
+                email={personalInfo.email}
+                subject="Portfolio Contact"
+                body="Hi Pratik,"
+                iconOnly
+              />
             </motion.div>
+            </div>
           </div>
         </div>
 

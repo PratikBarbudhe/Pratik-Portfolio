@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Mail, Heart, Shield, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Heart, Shield, ExternalLink } from 'lucide-react';
 import { personalInfo, navLinks } from '../data/portfolioData';
+import EmailProviderMenu from './EmailProviderMenu';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -46,13 +47,13 @@ const Footer = () => {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="text-cyber-muted hover:text-cyber-accent transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
+              <EmailProviderMenu
+                email={personalInfo.email}
+                subject="Portfolio Contact"
+                body="Hi Pratik,"
+                iconOnly
+                className="inline-block"
+              />
             </div>
           </div>
 
@@ -77,13 +78,12 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-cyber-text">Get In Touch</h3>
             <div className="space-y-3 text-sm">
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-2 text-cyber-muted hover:text-cyber-primary transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-                <span>{personalInfo.email}</span>
-              </a>
+              <EmailProviderMenu
+                email={personalInfo.email}
+                subject="Portfolio Contact"
+                body="Hi Pratik,"
+                label="Email"
+              />
               <a
                 href={personalInfo.linkedin}
                 target="_blank"

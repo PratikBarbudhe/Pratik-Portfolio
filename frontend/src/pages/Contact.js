@@ -14,6 +14,7 @@ import {
   AtSign,
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import EmailProviderMenu from '../components/EmailProviderMenu';
 
 // Input validation utilities
 const validateEmail = (email) => {
@@ -31,6 +32,13 @@ const sanitizeInput = (input) => {
     .replace(/'/g, '&#039;');
 };
 
+const contactColorClassMap = {
+  'cyber-primary': { bg: 'bg-cyber-primary/10', text: 'text-cyber-primary' },
+  'cyber-secondary': { bg: 'bg-cyber-secondary/10', text: 'text-cyber-secondary' },
+  'cyber-accent': { bg: 'bg-cyber-accent/10', text: 'text-cyber-accent' },
+  'cyber-warning': { bg: 'bg-cyber-warning/10', text: 'text-cyber-warning' },
+};
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -42,6 +50,7 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+  const [submitMessage, setSubmitMessage] = useState('');
 
   // Handle input change
   const handleChange = (e) => {
@@ -112,27 +121,46 @@ const Contact = () => {
     };
 
     try {
-      // Send to backend API
-      const response = await fetch(
-        process.env.REACT_APP_API_URL || 'http://localhost:5000/api/contact',
-        {
+      const configuredApiUrl = process.env.REACT_APP_API_URL;
+
+      if (configuredApiUrl) {
+        const response = await fetch(configuredApiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(sanitizedData),
-        }
-      );
+        });
 
-      if (response.ok) {
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
+
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setSubmitMessage("Message sent successfully! I'll get back to you soon.");
       } else {
-        throw new Error('Failed to send message');
+        // Fallback when backend endpoint is not configured.
+        const mailtoUrl = `mailto:${encodeURIComponent(
+          personalInfo.email
+        )}?subject=${encodeURIComponent(
+          sanitizedData.subject
+        )}&body=${encodeURIComponent(
+          `Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\n\n${sanitizedData.message}`
+        )}`;
+        window.location.href = mailtoUrl;
+        setSubmitStatus('success');
+        setSubmitMessage(
+          'Your email app has been opened with a prefilled message.'
+        );
       }
+
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Contact form error:', error);
       setSubmitStatus('error');
+      setSubmitMessage(
+        'Failed to send message. Please try again or email me directly.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -144,7 +172,7 @@ const Contact = () => {
       icon: Mail,
       label: 'Email',
       value: personalInfo.email,
-      href: `mailto:${personalInfo.email}`,
+      href: null,
       color: 'cyber-primary',
     },
     {
@@ -216,9 +244,7 @@ const Contact = () => {
                     className="flex items-center gap-3 p-4 bg-cyber-primary/10 border border-cyber-primary rounded-lg mb-6"
                   >
                     <CheckCircle className="w-5 h-5 text-cyber-primary flex-shrink-0" />
-                    <p className="text-cyber-primary">
-                      Message sent successfully! I'll get back to you soon.
-                    </p>
+                    <p className="text-cyber-primary">{submitMessage}</p>
                   </motion.div>
                 )}
 
@@ -229,9 +255,7 @@ const Contact = () => {
                     className="flex items-center gap-3 p-4 bg-cyber-danger/10 border border-cyber-danger rounded-lg mb-6"
                   >
                     <AlertCircle className="w-5 h-5 text-cyber-danger flex-shrink-0" />
-                    <p className="text-cyber-danger">
-                      Failed to send message. Please try again or email me directly.
-                    </p>
+                    <p className="text-cyber-danger">{submitMessage}</p>
                   </motion.div>
                 )}
 
@@ -390,15 +414,23 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + index * 0.1 }}
                   >
-                    {item.href ? (
+                    {item.label === 'Email' ? (
+                      <EmailProviderMenu
+                        email={personalInfo.email}
+                        label={item.label}
+                        className="w-full"
+                        subject="Portfolio Contact"
+                        body="Hi Pratik,"
+                      />
+                    ) : item.href ? (
                       <a
                         href={item.href}
                         target={item.href.startsWith('mailto') ? undefined : '_blank'}
                         rel="noopener noreferrer"
                         className="card-cyber p-5 flex items-start gap-4 group hover:border-cyber-primary/50 transition-all"
                       >
-                        <div className={`p-3 bg-${item.color}/10 rounded-lg`}>
-                          <item.icon className={`w-5 h-5 text-${item.color}`} />
+                        <div className={`p-3 ${contactColorClassMap[item.color].bg} rounded-lg`}>
+                          <item.icon className={`w-5 h-5 ${contactColorClassMap[item.color].text}`} />
                         </div>
                         <div>
                           <p className="text-sm text-cyber-muted mb-1">{item.label}</p>
@@ -409,8 +441,8 @@ const Contact = () => {
                       </a>
                     ) : (
                       <div className="card-cyber p-5 flex items-start gap-4">
-                        <div className={`p-3 bg-${item.color}/10 rounded-lg`}>
-                          <item.icon className={`w-5 h-5 text-${item.color}`} />
+                        <div className={`p-3 ${contactColorClassMap[item.color].bg} rounded-lg`}>
+                          <item.icon className={`w-5 h-5 ${contactColorClassMap[item.color].text}`} />
                         </div>
                         <div>
                           <p className="text-sm text-cyber-muted mb-1">{item.label}</p>

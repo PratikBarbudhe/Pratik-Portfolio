@@ -1,5 +1,8 @@
 // Portfolio Data - Easy to update all content from one place
 // Update this file to change your portfolio content
+import certCyberFundamentals from '../assets/certificates/cert-cyber-fundamentals.svg';
+import certNetworkingBasics from '../assets/certificates/cert-networking-basics.svg';
+import certEthicalHacking from '../assets/certificates/cert-ethical-hacking.svg';
 
 export const personalInfo = {
   name: "Pratik Barbudhe", // Replace with your actual name
@@ -188,7 +191,7 @@ export const certificationsData = [
     date: "Apr 2024", // Update with actual date
     credentialId: "NVL7NHUVEXDZ", // Add if available
     credentialUrl: "https://coursera.org/verify/NVL7NHUVEXDZ", // Add verification URL
-    image: "https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU",
+    image: certCyberFundamentals,
     description: "Completed foundational training covering key security principles and practical defensive strategies.",
     keyLearnings: [
       "Threat modeling basics",
@@ -205,7 +208,7 @@ export const certificationsData = [
     date: "2024",
     credentialId: "XXXXX",
     credentialUrl: "#",
-    image: "https://placehold.co/1000x650/10132b/00d4ff?text=Networking+Basics",
+    image: certNetworkingBasics,
     description: "Learned core networking concepts needed for security analysis and monitoring.",
     keyLearnings: [
       "Subnetting and routing concepts",
@@ -222,7 +225,7 @@ export const certificationsData = [
     date: "2024",
     credentialId: "XXXXX",
     credentialUrl: "#",
-    image: "https://placehold.co/1000x650/1a1336/7c3aed?text=Ethical+Hacking+Awareness",
+    image: certEthicalHacking,
     description: "Introduced ethical hacking workflows and vulnerability analysis mindset.",
     keyLearnings: [
       "Reconnaissance workflow",
@@ -255,20 +258,53 @@ export const learningJournalData = [
     date: "2026-03-20",
     topic: "SIEM Log Correlation Basics",
     notes: "Practiced creating simple correlation ideas to detect brute-force login attempts and suspicious privilege escalation patterns.",
+    snippetTitle: "Basic failed-login correlation logic",
+    snippetLanguage: "javascript",
+    snippet: `const isSuspiciousLoginPattern = (failedAttempts, minutesWindow) => {
+  return failedAttempts >= 5 && minutesWindow <= 10;
+};`,
   },
   {
     id: 2,
     date: "2026-03-18",
     topic: "OWASP Top 10 - Broken Access Control",
     notes: "Reviewed common IDOR scenarios and documented secure authorization checks for backend APIs.",
+    snippetTitle: "Role and ownership authorization check",
+    snippetLanguage: "javascript",
+    snippet: `const canAccessRecord = ({ userId, role }, recordOwnerId) => {
+  return role === 'admin' || userId === recordOwnerId;
+};`,
   },
   {
     id: 3,
     date: "2026-03-15",
     topic: "Nmap Service Enumeration",
     notes: "Compared scan options for speed and detail, and wrote notes on interpreting open ports and service banners.",
+    snippetTitle: "Sample nmap command set",
+    snippetLanguage: "bash",
+    snippet: `nmap -sV -sC target.example.com
+nmap -p- --min-rate 1000 target.example.com`,
   },
-  
+  {
+    id: 4,
+    date: "2026-03-12",
+    topic: "Secure Input Validation",
+    notes: "Practiced whitelist-based validation and length restrictions before request processing.",
+    snippetTitle: "Email validation helper",
+    snippetLanguage: "javascript",
+    snippet: `const isValidEmail = (email) =>
+  /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.trim());`,
+  },
+  {
+    id: 5,
+    date: "2026-03-09",
+    topic: "JWT Session Security",
+    notes: "Reviewed token expiration strategy and refresh token handling to reduce session hijack risk.",
+    snippetTitle: "JWT expiry check",
+    snippetLanguage: "javascript",
+    snippet: `const isExpired = (expUnixSeconds) =>
+  Date.now() >= expUnixSeconds * 1000;`,
+  },
 ];
 
 export const navLinks = [

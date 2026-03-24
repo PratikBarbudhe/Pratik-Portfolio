@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="Networking Basics certificate">
+  <rect width="1200" height="700" fill="#0b1020"/>
+  <rect x="40" y="40" width="1120" height="620" rx="18" fill="#111827" stroke="#00d4ff" stroke-width="3"/>
+  <text x="600" y="250" fill="#00d4ff" font-size="54" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700">Networking Basics</text>
+  <text x="600" y="340" fill="#cbd5e1" font-size="34" text-anchor="middle" font-family="Arial, sans-serif">Certificate Preview</text>
+  <text x="600" y="430" fill="#00ff88" font-size="24" text-anchor="middle" font-family="Arial, sans-serif">Pratik Barbudhe</text>
+</svg>
