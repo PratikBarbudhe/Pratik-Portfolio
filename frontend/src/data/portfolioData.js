@@ -60,8 +60,8 @@ export const projectsData = [
       "Export reports in multiple formats",
     ],
     securityRelevance: "Directly addresses web application security by automating vulnerability detection, a critical skill for SOC analysts and security consultants.",
-    github: "https://github.com/your-username/web-vulnerability-scanner",
-    demo: null, // Add demo URL if available
+    github: "https://github.com/PratikBarbudhe",
+    demo: "https://pratikbarbudhe.github.io", // Replace with exact project demo URL if available
     image: "https://placehold.co/1200x700/0b1020/00ff88?text=Web+Vulnerability+Scanner",
     status: "Completed",
     featured: true,
@@ -80,8 +80,8 @@ export const projectsData = [
       "Generates attendance reports",
     ],
     securityRelevance: "Demonstrates understanding of biometric authentication concepts, image processing, and secure data handling - relevant for identity and access management.",
-    github: "https://github.com/your-username/ai-attendance-system",
-    demo: null,
+    github: "https://github.com/PratikBarbudhe",
+    demo: "https://pratikbarbudhe.github.io",
     image: "https://placehold.co/1200x700/10132b/00d4ff?text=AI-ML+Attendance+System",
     status: "Completed",
     featured: true,
@@ -101,8 +101,8 @@ export const projectsData = [
       "Resource recommendations",
     ],
     securityRelevance: "Implemented secure API integration, user authentication, and data validation - foundational skills for secure web development.",
-    github: "https://github.com/your-username/codenest",
-    demo: null,
+    github: "https://github.com/PratikBarbudhe",
+    demo: "https://pratikbarbudhe.github.io",
     image: "https://placehold.co/1200x700/1a1336/7c3aed?text=CodeNest+Learning+Platform",
     status: "Completed",
     featured: false,
@@ -190,7 +190,7 @@ export const certificationsData = [
     issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
     date: "Apr 2024", // Update with actual date
     credentialId: "NVL7NHUVEXDZ", // Add if available
-    credentialUrl: "https://coursera.org/verify/NVL7NHUVEXDZ", // Add verification URL
+    credentialUrl: "/certificates/Connect-and-Protect-Networks-and-Network-Certificate.pdf", // Local document preview
     image: certCyberFundamentals,
     description: "Completed foundational training covering key security principles and practical defensive strategies.",
     keyLearnings: [

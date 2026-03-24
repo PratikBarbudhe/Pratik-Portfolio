@@ -58,7 +58,7 @@ const JournalEntryCard = ({ entry, index, compact = false }) => {
 };
 
 const LearningJournal = () => {
-  const latestEntries = learningJournalData.slice(0, 4);
+  const latestEntries = learningJournalData.slice(0, 3);
   const olderEntries = learningJournalData.slice(4);
 
   return (

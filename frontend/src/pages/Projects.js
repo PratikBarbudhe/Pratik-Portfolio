@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import {
   Shield,
   Github,
@@ -29,8 +30,7 @@ const ProjectImage = ({ project }) => (
   </div>
 );
 
-const ProjectCard = ({ project, index }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const ProjectCard = ({ project, index, isExpanded, onToggle, isHighlighted }) => {
 
   return (
     <motion.div
@@ -38,7 +38,9 @@ const ProjectCard = ({ project, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="card-cyber overflow-hidden"
+      className={`card-cyber overflow-hidden transition-all duration-500 ${
+        isHighlighted ? 'ring-2 ring-cyber-primary shadow-[0_0_24px_rgba(0,255,136,0.25)]' : ''
+      }`}
     >
       {/* Project visual helps visitors quickly evaluate the project */}
       <ProjectImage project={project} />
@@ -109,7 +111,7 @@ const ProjectCard = ({ project, index }) => {
 
         {/* Expand/Collapse Button */}
         <button
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={onToggle}
           className="flex items-center gap-2 text-cyber-primary hover:text-cyber-secondary transition-colors text-sm font-medium"
         >
           {isExpanded ? (
@@ -169,7 +171,7 @@ const ProjectCard = ({ project, index }) => {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-3">
-                {project.github && (
+                {project.github ? (
                   <a
                     href={project.github}
                     target="_blank"
@@ -179,8 +181,17 @@ const ProjectCard = ({ project, index }) => {
                     <Github className="w-4 h-4" />
                     View Code
                   </a>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="btn-cyber text-xs py-2 px-4 inline-flex items-center gap-2 opacity-50 cursor-not-allowed"
+                  >
+                    <Github className="w-4 h-4" />
+                    View Code
+                  </button>
                 )}
-                {project.demo && (
+                {project.demo ? (
                   <a
                     href={project.demo}
                     target="_blank"
@@ -188,8 +199,17 @@ const ProjectCard = ({ project, index }) => {
                     className="btn-secondary text-xs py-2 px-4 inline-flex items-center gap-2"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Live Project
+                    Live Demo
                   </a>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="btn-secondary text-xs py-2 px-4 inline-flex items-center gap-2 opacity-50 cursor-not-allowed"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Live Demo
+                  </button>
                 )}
               </div>
             </div>
@@ -201,7 +221,51 @@ const ProjectCard = ({ project, index }) => {
 };
 
 const Projects = () => {
+  const location = useLocation();
   const [filter, setFilter] = useState('all');
+  const [expandedProjectIds, setExpandedProjectIds] = useState({});
+  const [highlightedProjectId, setHighlightedProjectId] = useState(null);
+  const projectRefs = useRef({});
+
+  const focusedProjectId = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    const fromQuery = Number(params.get('project'));
+    const fromState = Number(location.state?.focusProjectId);
+    return Number.isFinite(fromQuery) && fromQuery > 0
+      ? fromQuery
+      : Number.isFinite(fromState) && fromState > 0
+      ? fromState
+      : null;
+  }, [location.search, location.state]);
+
+  useEffect(() => {
+    if (!focusedProjectId) return;
+    // Ensure the target project is visible even if user last selected another filter.
+    setFilter('all');
+    // Auto-expand and highlight the selected project from homepage cards.
+    setExpandedProjectIds((prev) => ({ ...prev, [focusedProjectId]: true }));
+    setHighlightedProjectId(focusedProjectId);
+
+    // Retry briefly so scroll works reliably after route transition/render.
+    let attempts = 0;
+    const maxAttempts = 20;
+    const scrollTimer = setInterval(() => {
+      const element = projectRefs.current[focusedProjectId];
+      attempts += 1;
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        clearInterval(scrollTimer);
+      } else if (attempts >= maxAttempts) {
+        clearInterval(scrollTimer);
+      }
+    }, 60);
+
+    const highlightTimer = setTimeout(() => setHighlightedProjectId(null), 3000);
+    return () => {
+      clearInterval(scrollTimer);
+      clearTimeout(highlightTimer);
+    };
+  }, [focusedProjectId]);
 
   const filteredProjects =
     filter === 'all'
@@ -268,7 +332,20 @@ const Projects = () => {
           {/* Projects Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <div key={project.id} ref={(el) => { projectRefs.current[project.id] = el; }}>
+                <ProjectCard
+                  project={project}
+                  index={index}
+                  isExpanded={Boolean(expandedProjectIds[project.id])}
+                  onToggle={() =>
+                    setExpandedProjectIds((prev) => ({
+                      ...prev,
+                      [project.id]: !prev[project.id],
+                    }))
+                  }
+                  isHighlighted={highlightedProjectId === project.id}
+                />
+              </div>
             ))}
           </div>
 

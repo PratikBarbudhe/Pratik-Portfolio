@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { personalInfo, projectsData, learningJournalData } from '../data/portfolioData';
 import EmailProviderMenu from '../components/EmailProviderMenu';
-import profileImage from '../assets/profile/profile-placeholder.svg';
+import profileImage from '../assets/profile/profile.jpg';
 
 // Animated background particles
 const CyberParticles = () => (
@@ -95,7 +95,8 @@ const FeaturedProjectCard = ({ project, index }) => (
       ))}
     </div>
     <Link
-      to="/projects"
+      to={`/projects?project=${project.id}`}
+      state={{ focusProjectId: project.id }}
       className="inline-flex items-center gap-2 text-cyber-primary hover:text-cyber-secondary transition-colors text-sm font-medium"
     >
       View Details
@@ -135,46 +136,47 @@ const Home = () => {
         <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-cyber-secondary/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          {/* Terminal-style intro aligned to full hero width */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex w-fit mx-auto items-center gap-2 bg-cyber-card border border-cyber-border rounded-full px-4 py-2 mb-6"
+          >
+            <span className="w-2 h-2 bg-cyber-primary rounded-full animate-pulse" />
+            <span className="font-mono text-sm text-cyber-muted">
+              <span className="text-cyber-primary">$</span> ./welcome.sh --status=
+              <span className="text-cyber-primary">active</span>
+            </span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-10 gap-10 lg:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex justify-center lg:justify-start"
+              className="flex justify-center lg:justify-start lg:col-span-3"
             >
-              <div className="relative w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyber-primary via-cyber-secondary to-cyber-accent p-[3px]">
+              <div className="relative w-80 h-80 sm:w-96 sm:h-96 md:w-80 md:h-80">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyber-primary/70 via-cyber-secondary/70 to-cyber-accent/70 p-[1px]">
                   <img
                     src={profileImage}
                     alt="Pratik Barbudhe profile"
                     className="w-full h-full rounded-full object-cover bg-cyber-card"
                   />
                 </div>
-                <div className="absolute inset-0 rounded-full blur-2xl bg-cyber-primary/20 -z-10" />
+                <div className="absolute inset-0 rounded-full blur-2xl bg-cyber-primary/15 -z-10" />
+                <div className="absolute inset-0 rounded-full shadow-[0_10px_35px_rgba(0,255,136,0.18)] -z-10" />
               </div>
             </motion.div>
 
-            <div className="text-center lg:text-left">
-            {/* Terminal-style intro */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-cyber-card border border-cyber-border rounded-full px-4 py-2 mb-8"
-            >
-              <span className="w-2 h-2 bg-cyber-primary rounded-full animate-pulse" />
-              <span className="font-mono text-sm text-cyber-muted">
-                <span className="text-cyber-primary">$</span> ./welcome.sh --status=
-                <span className="text-cyber-primary">active</span>
-              </span>
-            </motion.div>
-
+            <div className="text-center lg:col-span-7 lg:max-w-4xl lg:mx-auto">
             {/* Main heading */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold mb-5"
             >
               <span className="text-cyber-text">Hi, I’m </span>
               <br />
@@ -188,9 +190,9 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-8"
+              className="mb-6"
             >
-              <p className="text-lg md:text-xl text-cyber-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-lg md:text-xl text-cyber-muted max-w-2xl mx-auto leading-relaxed">
                 <span className="text-cyber-primary font-mono">MCA Cyber Security Student</span>
                 {' | '}
                 <span className="text-cyber-secondary">SOC Analyst Aspirant</span>
@@ -204,7 +206,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-cyber-darker border border-cyber-border rounded-lg p-4 max-w-xl mx-auto lg:mx-0 mb-10 font-mono text-sm"
+              className="bg-cyber-darker border border-cyber-border rounded-lg p-4 max-w-xl mx-auto mb-7 font-mono text-sm"
             >
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-3 h-3 rounded-full bg-cyber-danger" />
@@ -223,12 +225,16 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col items-center">
+            {/* CTA Buttons - centered relative to full hero container */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
             >
               <Link to="/projects" className="btn-cyber-filled flex items-center gap-2">
                 <Shield className="w-4 h-4" />
@@ -240,12 +246,12 @@ const Home = () => {
               </Link>
             </motion.div>
 
-            {/* Social Links */}
+            {/* Social Links - centered relative to full hero container */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="flex items-center justify-center lg:justify-start gap-6"
+              className="flex items-center justify-center gap-6"
             >
               <a
                 href={personalInfo.github}
@@ -272,7 +278,6 @@ const Home = () => {
                 iconOnly
               />
             </motion.div>
-            </div>
           </div>
         </div>
 
