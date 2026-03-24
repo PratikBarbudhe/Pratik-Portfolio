@@ -60,8 +60,9 @@ export const projectsData = [
       "Export reports in multiple formats",
     ],
     securityRelevance: "Directly addresses web application security by automating vulnerability detection, a critical skill for SOC analysts and security consultants.",
-    github: "https://github.com/PratikBarbudhe",
-    demo: "https://pratikbarbudhe.github.io", // Replace with exact project demo URL if available
+    // Add project links here (these are shown when "Show Details" is expanded on Projects page)
+    github: "https://github.com/PratikBarbudhe/web-vulnerability-scanner", // <-- paste repo link
+    demo: "https://your-live-demo-link.com", // <-- paste hosted website link (Netlify/Vercel/GitHub Pages)
     image: "https://placehold.co/1200x700/0b1020/00ff88?text=Web+Vulnerability+Scanner",
     status: "Completed",
     featured: true,
@@ -80,8 +81,9 @@ export const projectsData = [
       "Generates attendance reports",
     ],
     securityRelevance: "Demonstrates understanding of biometric authentication concepts, image processing, and secure data handling - relevant for identity and access management.",
-    github: "https://github.com/PratikBarbudhe",
-    demo: "https://pratikbarbudhe.github.io",
+    // Add project links here (these are shown when "Show Details" is expanded on Projects page)
+    github: "https://github.com/PratikBarbudhe/ai-attendance-system", // <-- paste repo link
+    demo: "https://your-live-demo-link.com", // <-- paste hosted website link
     image: "https://placehold.co/1200x700/10132b/00d4ff?text=AI-ML+Attendance+System",
     status: "Completed",
     featured: true,
@@ -101,8 +103,9 @@ export const projectsData = [
       "Resource recommendations",
     ],
     securityRelevance: "Implemented secure API integration, user authentication, and data validation - foundational skills for secure web development.",
-    github: "https://github.com/PratikBarbudhe",
-    demo: "https://pratikbarbudhe.github.io",
+    // Add project links here (these are shown when "Show Details" is expanded on Projects page)
+    github: "https://github.com/PratikBarbudhe/codenest", // <-- paste repo link
+    demo: "https://your-live-demo-link.com", // <-- paste hosted website link
     image: "https://placehold.co/1200x700/1a1336/7c3aed?text=CodeNest+Learning+Platform",
     status: "Completed",
     featured: false,

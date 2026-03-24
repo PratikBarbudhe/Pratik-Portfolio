@@ -111,8 +111,9 @@ const ProjectCard = ({ project, index, isExpanded, onToggle, isHighlighted }) =>
 
         {/* Expand/Collapse Button */}
         <button
+          type="button"
           onClick={onToggle}
-          className="flex items-center gap-2 text-cyber-primary hover:text-cyber-secondary transition-colors text-sm font-medium"
+          className="relative z-10 flex items-center gap-2 text-cyber-primary hover:text-cyber-secondary transition-colors text-sm font-medium"
         >
           {isExpanded ? (
             <>
@@ -247,13 +248,19 @@ const Projects = () => {
     setHighlightedProjectId(focusedProjectId);
 
     // Retry briefly so scroll works reliably after route transition/render.
+    const scrollWithOffset = (element) => {
+      const navbarOffsetPx = 110; // fixed navbar + breathing room
+      const top = element.getBoundingClientRect().top + window.scrollY - navbarOffsetPx;
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+
     let attempts = 0;
-    const maxAttempts = 20;
+    const maxAttempts = 30;
     const scrollTimer = setInterval(() => {
       const element = projectRefs.current[focusedProjectId];
       attempts += 1;
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        scrollWithOffset(element);
         clearInterval(scrollTimer);
       } else if (attempts >= maxAttempts) {
         clearInterval(scrollTimer);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mail,
   Linkedin,
@@ -8,10 +8,10 @@ import {
   MapPin,
   CheckCircle,
   AlertCircle,
-  Loader2,
   MessageSquare,
   User,
   AtSign,
+  X,
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import EmailProviderMenu from '../components/EmailProviderMenu';
@@ -48,9 +48,20 @@ const Contact = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isComposerModalOpen, setIsComposerModalOpen] = useState(false);
+  const [pendingDraft, setPendingDraft] = useState(null);
+
+  const buildGmailComposeUrl = ({ subject, body }) =>
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      personalInfo.email
+    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  const buildOutlookComposeUrl = ({ subject, body }) =>
+    `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(
+      personalInfo.email
+    )}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   // Handle input change
   const handleChange = (e) => {
@@ -101,15 +112,31 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
+  const openComposer = (provider) => {
+    if (!pendingDraft) return;
+    const composeUrl =
+      provider === 'gmail'
+        ? buildGmailComposeUrl(pendingDraft)
+        : buildOutlookComposeUrl(pendingDraft);
+
+    // Open only in a single new tab/window.
+    window.open(composeUrl, '_blank', 'noopener,noreferrer');
+
+    setIsComposerModalOpen(false);
+    setSubmitStatus('success');
+    setSubmitMessage('Composer opened. Please review and send your email.');
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setPendingDraft(null);
+  };
+
+  // Validate and prepare message draft, then show provider chooser.
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    setIsSubmitting(true);
     setSubmitStatus(null);
 
     // Sanitize inputs before sending
@@ -120,50 +147,11 @@ const Contact = () => {
       message: sanitizeInput(formData.message.trim()),
     };
 
-    try {
-      const configuredApiUrl = process.env.REACT_APP_API_URL;
-
-      if (configuredApiUrl) {
-        const response = await fetch(configuredApiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(sanitizedData),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to send message');
-        }
-
-        setSubmitStatus('success');
-        setSubmitMessage("Message sent successfully! I'll get back to you soon.");
-      } else {
-        // Fallback when backend endpoint is not configured.
-        const mailtoUrl = `mailto:${encodeURIComponent(
-          personalInfo.email
-        )}?subject=${encodeURIComponent(
-          sanitizedData.subject
-        )}&body=${encodeURIComponent(
-          `Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\n\n${sanitizedData.message}`
-        )}`;
-        window.location.href = mailtoUrl;
-        setSubmitStatus('success');
-        setSubmitMessage(
-          'Your email app has been opened with a prefilled message.'
-        );
-      }
-
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
-      console.error('Contact form error:', error);
-      setSubmitStatus('error');
-      setSubmitMessage(
-        'Failed to send message. Please try again or email me directly.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+    setPendingDraft({
+      subject: sanitizedData.subject,
+      body: `Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\n\n${sanitizedData.message}`,
+    });
+    setIsComposerModalOpen(true);
   };
 
   // Contact info items
@@ -200,6 +188,61 @@ const Contact = () => {
 
   return (
     <div className="pt-20 min-h-screen">
+      <AnimatePresence>
+        {isComposerModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center px-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Choose email provider"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.98 }}
+              className="card-cyber w-full max-w-md p-6"
+            >
+              <div className="flex items-start justify-between gap-4 mb-5">
+                <div>
+                  <h3 className="text-xl font-semibold text-cyber-text">Choose Email Provider</h3>
+                  <p className="text-sm text-cyber-muted mt-1">
+                    Select where to compose your message.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsComposerModalOpen(false)}
+                  className="text-cyber-muted hover:text-cyber-text transition-colors"
+                  aria-label="Close provider dialog"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => openComposer('gmail')}
+                  className="btn-cyber-filled w-full"
+                >
+                  Gmail
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openComposer('outlook')}
+                  className="btn-secondary w-full"
+                >
+                  Outlook
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Hero Section */}
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -379,20 +422,10 @@ const Contact = () => {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="btn-cyber-filled w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-cyber-filled w-full flex items-center justify-center gap-2"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        Send Message
-                      </>
-                    )}
+                    <Send className="w-4 h-4" />
+                    Send Message
                   </button>
                 </form>
               </div>

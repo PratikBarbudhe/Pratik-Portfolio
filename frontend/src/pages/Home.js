@@ -94,14 +94,6 @@ const FeaturedProjectCard = ({ project, index }) => (
         </span>
       ))}
     </div>
-    <Link
-      to={`/projects?project=${project.id}`}
-      state={{ focusProjectId: project.id }}
-      className="inline-flex items-center gap-2 text-cyber-primary hover:text-cyber-secondary transition-colors text-sm font-medium"
-    >
-      View Details
-      <ArrowRight className="w-4 h-4" />
-    </Link>
   </motion.div>
 );
 
@@ -328,7 +320,11 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
             {featuredProjects.map((project, index) => (
-              <FeaturedProjectCard key={project.id} project={project} index={index} />
+              <FeaturedProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+              />
             ))}
           </div>
 
