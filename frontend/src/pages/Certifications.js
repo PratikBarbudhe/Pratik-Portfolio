@@ -263,20 +263,21 @@ const Certifications = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               {
-                title: 'CompTIA Security+',
+                title: 'Cisco Certified Network Associate (CCNA)',
                 status: 'Preparing',
-                description: 'Industry-standard certification for security professionals.',
+                description: 'Industry-recognized certification focused on networking fundamentals, IP connectivity, security basics, and network troubleshooting.',
               },
               {
-                title: 'CEH (Certified Ethical Hacker)',
+                title: 'CompTIA Security+',
                 status: 'Planned',
-                description: 'EC-Council certification for ethical hacking and penetration testing.',
+                description: 'Globally recognized certification covering cybersecurity fundamentals, risk management, security controls, and threat detection.'
               },
               {
-                title: 'AWS Cloud Security',
+                title: 'eLearnSecurity Junior Penetration Tester (eJPT)',
                 status: 'Planned',
-                description: 'Cloud security fundamentals and best practices.',
+                description: 'Hands-on certification covering penetration testing, network attacks, and vulnerability assessment.',
               },
+              
             ].map((cert, index) => (
               <motion.div
                 key={cert.title}

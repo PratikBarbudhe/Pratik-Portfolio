@@ -213,15 +213,15 @@ export const certificationsData = [
     issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
     date: "Mar 2026", // Update with actual date
     credentialId: "LSE0WYRGAGOU", // Add if available
-    credentialUrl: "/certificates/Asset-Threats and Vulnerabilities.pdf", // Local document preview
+    credentialUrl: "/certificates/Assets-Threats and Vulnerabilities.pdf", // Local document preview
     image: certAssetsThreats,
-    description: "Completed foundational training covering key security principles and practical defensive strategies.",
+    description: "Learned how to identify and protect organizational assets by analyzing threats, vulnerabilities, and applying security controls.",
     keyLearnings: [
-      "Threat modeling basics",
-      "CIA triad in real-world systems",
-      "Incident response lifecycle",
+      "Asset classification and attack surface analysis",
+      "Identifying threats and common vulnerabilities",
+      "Threat modeling and risk mitigation techniques"
     ],
-    skills: ["Security Concepts", "Threat Analysis", "Risk Assessment"],
+    skills: ["Vulnerability Management","Threat Modeling","Risk Assessment"],
     featured: true,
   },
   {
@@ -232,13 +232,13 @@ export const certificationsData = [
     credentialId: "CCEBDMEHLC5C", // Add if available
     credentialUrl: "/certificates/Tools-of-the-Trade-Linux-and-SQL-Certificate.pdf", // Local document preview
     image: certToolsofTrade,
-    description: "Completed foundational training covering key security principles and practical defensive strategies.",
+    description: "Learned to use Linux commands and SQL queries to manage systems, analyze data, and support cybersecurity tasks.",
     keyLearnings: [
-      "Threat modeling basics",
-      "CIA triad in real-world systems",
-      "Incident response lifecycle",
+      "Linux fundamentals and command-line operations",
+      "File management, permissions, and user authentication",
+      "SQL queries for retrieving and analyzing data"
     ],
-    skills: ["Security Concepts", "Threat Analysis", "Risk Assessment"],
+    skills: ["Linux","SQL","Command-Line Interface"],
     featured: true,
   },
   {
