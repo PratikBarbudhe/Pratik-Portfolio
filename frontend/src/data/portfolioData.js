@@ -1,5 +1,10 @@
 // Portfolio Data - Easy to update all content from one place
 // Update this file to change your portfolio content
+
+import webVulnImg from '../assets/projects/web-vulnerability-scanner.png';
+import aiAttendanceImg from '../assets/projects/ai-ml-classroom-attendance-system.png';
+import codenestImg from '../assets/projects/codenest-learning-platform.png';
+
 import certCyberFundamentals from '../assets/certificates/Foundations-of-Cybersecurity.jpg';
 import certPlayItSafe from '../assets/certificates/Play It Safe.jpg';
 import certConnectandProtect from '../assets/certificates/Connect and Protect.jpg';
@@ -66,7 +71,7 @@ export const projectsData = [
     // Add project links here (these are shown when "Show Details" is expanded on Projects page)
     github: "https://github.com/PratikBarbudhe/web-vulnerability-scanner", // <-- paste repo link
     demo: "https://your-live-demo-link.com", // <-- paste hosted website link (Netlify/Vercel/GitHub Pages)
-    image: "https://placehold.co/1200x700/0b1020/00ff88?text=Web+Vulnerability+Scanner",
+    image: webVulnImg,
     status: "Completed",
     featured: true,
   },
@@ -87,7 +92,7 @@ export const projectsData = [
     // Add project links here (these are shown when "Show Details" is expanded on Projects page)
     github: "https://github.com/PratikBarbudhe/ai-attendance-system", // <-- paste repo link
     demo: "https://your-live-demo-link.com", // <-- paste hosted website link
-    image: "https://placehold.co/1200x700/10132b/00d4ff?text=AI-ML+Attendance+System",
+    image: "aiAttendanceImg",
     status: "Completed",
     featured: true,
     university: "Savitribai Phule Pune University",
@@ -109,7 +114,7 @@ export const projectsData = [
     // Add project links here (these are shown when "Show Details" is expanded on Projects page)
     github: "https://github.com/PratikBarbudhe/codenest", // <-- paste repo link
     demo: "https://your-live-demo-link.com", // <-- paste hosted website link
-    image: "https://placehold.co/1200x700/1a1336/7c3aed?text=CodeNest+Learning+Platform",
+    image: "codenestImg",
     status: "Completed",
     featured: false,
   },
