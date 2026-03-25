@@ -1,8 +1,11 @@
 // Portfolio Data - Easy to update all content from one place
 // Update this file to change your portfolio content
-import certCyberFundamentals from '../assets/certificates/cert-cyber-fundamentals.svg';
-import certNetworkingBasics from '../assets/certificates/cert-networking-basics.svg';
-import certEthicalHacking from '../assets/certificates/cert-ethical-hacking.svg';
+import certCyberFundamentals from '../assets/certificates/Foundations-of-Cybersecurity.jpg';
+import certPlayItSafe from '../assets/certificates/Play It Safe.jpg';
+import certConnectandProtect from '../assets/certificates/Connect and Protect.jpg';
+import certToolsofTrade from '../assets/certificates/Tools linux and SQL.jpg';
+import certAssetsThreats from '../assets/certificates/Assets, Threats, and Vulnerabilities.jpg';
+
 
 export const personalInfo = {
   name: "Pratik Barbudhe", // Replace with your actual name
@@ -187,14 +190,31 @@ export const skillsData = {
 };
 
 export const certificationsData = [
+  // {
+  //   id: 6,
+  //   title: "Foundations of Cyber Security",
+  //   issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
+  //   date: "Apr 2024", // Update with actual date
+  //   credentialId: "NVL7NHUVEXDZ", // Add if available
+  //   credentialUrl: "/certificates/Foundations-of-CyberSecurity-Certificate.pdf", // Local document preview
+  //   image: certCyberFundamentals,
+  //   description: "Completed foundational training covering key security principles and practical defensive strategies.",
+  //   keyLearnings: [
+  //     "Threat modeling basics",
+  //     "CIA triad in real-world systems",
+  //     "Incident response lifecycle",
+  //   ],
+  //   skills: ["Security Concepts", "Threat Analysis", "Risk Assessment"],
+  //   featured: true,
+  // },
   {
-    id: 1,
-    title: "Cyber Security Fundamentals",
+    id: 5,
+    title: "Assets, Threats, and Vulnerabilities",
     issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
-    date: "Apr 2024", // Update with actual date
-    credentialId: "NVL7NHUVEXDZ", // Add if available
-    credentialUrl: "/certificates/Connect-and-Protect-Networks-and-Network-Certificate.pdf", // Local document preview
-    image: certCyberFundamentals,
+    date: "Mar 2026", // Update with actual date
+    credentialId: "LSE0WYRGAGOU", // Add if available
+    credentialUrl: "/certificates/Asset-Threats and Vulnerabilities.pdf", // Local document preview
+    image: certAssetsThreats,
     description: "Completed foundational training covering key security principles and practical defensive strategies.",
     keyLearnings: [
       "Threat modeling basics",
@@ -205,37 +225,71 @@ export const certificationsData = [
     featured: true,
   },
   {
-    id: 2,
-    title: "Networking Basics",
-    issuer: "Add Issuer Name",
-    date: "2024",
-    credentialId: "XXXXX",
-    credentialUrl: "#",
-    image: certNetworkingBasics,
-    description: "Learned core networking concepts needed for security analysis and monitoring.",
+    id: 4,
+    title: "Tools of the Trade: Linux and SQL",
+    issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
+    date: "Feb 2026", // Update with actual date
+    credentialId: "CCEBDMEHLC5C", // Add if available
+    credentialUrl: "/certificates/Tools-of-the-Trade-Linux-and-SQL-Certificate.pdf", // Local document preview
+    image: certToolsofTrade,
+    description: "Completed foundational training covering key security principles and practical defensive strategies.",
     keyLearnings: [
-      "Subnetting and routing concepts",
-      "Packet flow troubleshooting",
-      "Common network attack vectors",
+      "Threat modeling basics",
+      "CIA triad in real-world systems",
+      "Incident response lifecycle",
     ],
-    skills: ["TCP/IP", "Network Protocols", "Network Security"],
+    skills: ["Security Concepts", "Threat Analysis", "Risk Assessment"],
     featured: true,
   },
   {
     id: 3,
-    title: "Ethical Hacking & Security Awareness",
-    issuer: "Add Issuer Name",
-    date: "2024",
-    credentialId: "XXXXX",
-    credentialUrl: "#",
-    image: certEthicalHacking,
-    description: "Introduced ethical hacking workflows and vulnerability analysis mindset.",
+    title: "Connect and Protect: Networks and Network Security",
+    issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
+    date: "Oct 2025",
+    credentialId: "H07G1N5WBPU3",
+    credentialUrl: "/certificates/Connect-and-Protect-Networks-and-Network-Certificate.pdf",
+    image: certConnectandProtect,
+    description: "Learned how networks work and how to secure them using protocols, tools, and cybersecurity best practices.",
     keyLearnings: [
-      "Reconnaissance workflow",
-      "Safe vulnerability validation",
-      "Responsible disclosure process",
+      "Network fundamentals, TCP/IP, and protocols",
+      "Common network attacks and vulnerabilities",
+      "Network security tools and protection techniques"
     ],
-    skills: ["Penetration Testing", "Security Tools", "Vulnerability Analysis"],
+    skills: ["Network Security","TCP/IP","Network Protocols"],
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Play It Safe: Manage Security Risks",
+    issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
+    date: "Sep 2025",
+    credentialId: "ENKJPHE2M2AV ",
+    credentialUrl: "/certificates/Play-It-Safe-Manage-Security-Risks-Certificate.pdf",
+    image: certPlayItSafe,
+    description: "Learned how to identify, assess, and manage cybersecurity risks using security frameworks, controls, and monitoring tools.",
+    keyLearnings: [
+      "Identifying threats, risks, and vulnerabilities",
+      "Understanding security frameworks and controls (NIST, CIA triad)",
+      "Using SIEM tools and incident response playbooks"
+    ],
+    skills: ["Risk Management","SIEM","Security Frameworks"],
+    featured: true,
+  },
+  {
+    id: 1,
+    title: "Foundations of Cyber Security",
+    issuer: "Coursera", // e.g., "Coursera", "Udemy", "NPTEL"
+    date: "Apr 2024", // Update with actual date
+    credentialId: "NVL7NHUVEXDZ", // Add if available
+    credentialUrl: "/certificates/Foundations-of-CyberSecurity-Certificate.pdf", // Local document preview
+    image: certCyberFundamentals,
+    description: "Completed foundational training covering key security principles and practical defensive strategies.",
+    keyLearnings: [
+      "Cybersecurity basics & CIA triad",
+      "Common threats and vulnerabilities",
+      "Security frameworks and risk concepts"
+    ],
+    skills: ["Security Concepts", "Security Controls", "Security Management"],
     featured: true,
   },
   // Add more certifications as you earn them

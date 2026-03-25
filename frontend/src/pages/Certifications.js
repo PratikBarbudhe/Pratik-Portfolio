@@ -34,7 +34,7 @@ const CertificationCard = ({ cert, index }) => (
       <img
         src={cert.image}
         alt={`${cert.title} certificate`}
-        className="w-full h-44 object-cover"
+        className="w-full h-auto max-h-64 object-contain bg-cyber-card p-2"
         loading="lazy"
         onError={(event) => {
           event.currentTarget.src =
