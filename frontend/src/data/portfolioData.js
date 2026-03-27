@@ -3,7 +3,7 @@
 
 import webVulnImg from '../assets/projects/web-vulnerability-scanner.png';
 import aiAttendanceImg from '../assets/projects/ai-ml-classroom-attendance-system.png';
-import codenestImg from '../assets/projects/codenest-learning-platform.png';
+//import codenestImg from '../assets/projects/codenest-learning-platform.png';
 
 import certCyberFundamentals from '../assets/certificates/Foundations-of-Cybersecurity.jpg';
 import certPlayItSafe from '../assets/certificates/Play It Safe.jpg';
@@ -92,7 +92,7 @@ export const projectsData = [
     // Add project links here (these are shown when "Show Details" is expanded on Projects page)
     github: "https://github.com/PratikBarbudhe/ai-attendance-system", // <-- paste repo link
     demo: "https://your-live-demo-link.com", // <-- paste hosted website link
-    image: "aiAttendanceImg",
+    image: aiAttendanceImg,
     status: "Completed",
     featured: true,
     university: "Savitribai Phule Pune University",

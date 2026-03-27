@@ -15,11 +15,12 @@ import {
 import { projectsData } from '../data/portfolioData';
 
 const ProjectImage = ({ project }) => (
-  <div className="relative h-52 md:h-56 overflow-hidden border-b border-cyber-border">
+  <div className="relative w-full aspect-video overflow-hidden border-b border-cyber-border">
+    {/* <div className="relative w-full overflow-hidden border-b border-cyber-border"> */}
     <img
       src={project.image}
       alt={`${project.title} preview`}
-      className="w-full h-full object-cover"
+      className="w-full h-full object-contain"
       loading="lazy"
       onError={(event) => {
         event.currentTarget.src =
